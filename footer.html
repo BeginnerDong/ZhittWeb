@@ -1,0 +1,97 @@
+<footer class="oh footer">
+	<div class="w1200" id="footer_app">
+		<div class="linkNav center">
+			<a href="index.html">首页</a>
+			<a href="knowUs.html">了解我们</a>
+			<a href="workSystem.html">业务体系</a>
+			<a href="knowCulture.html">知文化</a>
+			<a href="cooperate.html">招商合作</a>
+		</div>
+		<div class="underCnt oh">
+			<div class="phone fl">
+				<div>西安知业升涯文化科技有限公司</div>
+				<div>联系电话：{{phone}}</div>
+				<div>公司地址：{{address}}</div>
+			</div>
+			<div class="ewmBox fr center">
+				<div class="lis" v-for="item in qrImgEwm" ><img :src="item.ewmUrl"><p>{{item.ewmName}}</p></div>	
+			</div>
+		</div>
+		<div><p class="copyright center">{{copyright}}</p></div>
+	</div>
+	
+</footer>
+<script type="text/javascript">
+
+	var footer_app = new Vue({
+	    el: '#footer_app',
+	    data:function(){
+	        return {
+	        	is_toggle:false,
+				qrImg:[],
+				address:'陕西省西安市高新区大都荟国际',
+				phone:'18821620164',
+				qrImgEwm:[
+					{
+						ewmUrl:"images/home-img1.png",
+						ewmName:"微博二维码"
+					},
+					{
+						ewmUrl:"images/home-img1.png",
+						ewmName:"公众号二维码"
+					}
+				],
+				copyright:'备案号：陕ICP备18016586号-1'
+	        }
+	    },
+	    created:function () {
+	        var self = this;
+			self.getMainData()
+	        
+			
+	    },
+	    methods: {
+			
+			getMainData: function(id) {
+				var self = this;
+				var postData = {};
+				postData.searchItem = {
+					thirdapp_id:2,
+					title:'联系我们'
+				};
+				postData.getAfter = {
+					child: {
+						tableName: 'Label',
+						middleKey: 'id',
+						key: 'parentid',
+						searchItem: {
+							status: 1,
+						},
+						condition: '='
+					},
+				};
+
+				var callback = (res) => {
+					console.log('getMainData', res);
+					self.mainData = res.info.data[0];
+					for (var i = self.mainData['child'].length - 1; i >= 0; i--) {
+						
+						if(self.mainData['child'][i].title=="地址"){
+							self.address = self.mainData['child'][i].description
+						};
+						if(self.mainData['child'][i].title=="电话"){
+							self.phone = self.mainData['child'][i].description
+						};
+						if(self.mainData['child'][i].title=="二维码"){
+							self.qrImg = self.mainData['child'][i].mainImg
+						};
+					}
+
+				};
+				// window.base.labelGet(postData, callback);
+			},
+	        
+	    	
+	    }
+	});   
+</script>

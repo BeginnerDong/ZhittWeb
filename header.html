@@ -1,0 +1,107 @@
+
+<div id="header_app" class="bgc-white">
+	<div class="indNavbar w1200 pdtb20 pr">
+		<img class="logo" src="images/logo.png">
+		<div class="list fr">
+			<ul>
+				<li :class="currentUrl=='/index.html'?'on':''">
+					<a href="index.html">首页</a>
+				</li>
+				<li :class="currentUrl=='/knowUs.html'?'on':''">
+					<a href="knowUs.html">了解我们</a>
+				</li>
+				<li :class="currentUrl=='/workSystem.html'?'on':''">
+					<a href="workSystem.html">业务体系</a>
+				</li>
+				<li :class="currentUrl=='/knowCulture.html'?'on':''">
+					<a href="knowCulture.html">知文化</a>
+				</li>
+				<li :class="currentUrl=='/cooperate.html'?'on':''">
+					<a href="cooperate.html">招商合作</a>
+				</li>
+			</ul>
+		</div>
+		<div class="navBtn center iconfont" @click="topNavBtn">&#xe605;</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	 $(function(){
+		$(".indNavbar .list li").click(function(){
+			console.log(123);
+			$(this).addClass("on").siblings().removeClass("on")
+		});
+	})
+</script>
+
+<script type="text/javascript">
+
+	var header_app = new Vue({
+	    el: '#header_app',
+	    data:function(){
+	        return {
+	        	is_toggle:false,
+				shownav:true,
+				currentUrl:''
+	        }
+	    },
+	    created:function () {
+	        var self = this;
+			var currentUrl = window.base.GetUrlRelativePath();
+		
+			var reg = /\/([^\/]+)\.html/i;
+			if(reg.exec(currentUrl)&&reg.exec(currentUrl)[0]){
+				self.currentUrl = reg.exec(currentUrl)[0];
+			}else{
+				self.currentUrl = '/index.html';
+			};
+			console.log('self.currentUrl',self.currentUrl)
+	    },
+	    methods: {
+			toggleMenu:function(e){
+			    var self = this;
+			    self.is_toggle = !self.is_toggle;
+				var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+				var navigation = document.getElementById('navigation');
+				if(scrollTop<100){
+					if(self.is_toggle){
+						$("#navigation").css('background','rgb(0, 0, 0,0.6)');
+					}else{
+						$("#navigation").css('background','none');
+					};
+				};	
+			},
+			topNavBtn:function(){
+				if($(".indNavbar .list").css('display')=='none'){
+					$(".indNavbar .list").show()
+				}else{
+					$(".indNavbar .list").hide()
+				}
+			},
+	        
+	    	changeHeaderStyle: function(){
+	    		var self = this;
+	    		var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+	    		var navigation = document.getElementById('navigation');
+					if(scrollTop>=100){
+						$("#navigation").css('position','fixed');
+						$("#navigation").addClass('animated.faster  slideInDown delay-0.1s');
+						console.log('is_toggle-before08',self.is_toggle)
+						if(!self.is_toggle){
+							navigation.addEventListener('animationend', function() {
+								$("#navigation").css('background-color','hsla(0, 0%, 0%, 0.6)');
+							});
+						};
+					}else{          //恢复正常
+						$("#navigation").css('position','absolute');
+						if(!self.is_toggle){
+							$("#navigation").css('background','none');
+							$("#navigation").css('opacity','1');
+						};
+						$("#navigation").removeClass('animated.faster  slideInDown delay-0.1s');
+					}			
+	    	}
+	    }
+	});   
+</script>
+

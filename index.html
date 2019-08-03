@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<title>知条条官网</title>
+		<link type="text/css" rel="stylesheet" href="css/public.css">
+		<link type="text/css" rel="stylesheet" href="font/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/page.css">
+		<link rel="stylesheet" type="text/css" href="css/swiper.css">
+		<link rel="stylesheet" type="text/css" href="css/sport.css">
+		<script src="./js/vue.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/include.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+	</head>
+
+<body>
+	<div id="app">
+	<!-- 网站导航 -->
+	<div class="pubHeader" >
+		<include src="header.html"></include>
+	</div>
+	
+	<!-- <div class="pubHeadBanner" >
+		<include src="headBanner.html"></include>
+	</div> -->
+	
+	<!-- swiper轮播 -->
+	<div>
+		<include src="swiper.html"></include>
+	</div>
+	
+
+	<!-- 通知和动态列表 -->
+	<div class="pdb100">
+		<div class="indNews w1200 oh">
+			<div class="list oh">
+				<div class="pubTitle center">
+					<h1 class="fs30 mgb20">通知通告</h1>
+				</div>
+				<h1 class="tit">企业动态 <a class="more" :href="detailLink">更多</a></h1>
+				<div class="titLis">
+					<div class="leftTxet">
+						<p class="fs16 line30 gray6 moreTexwrap">{{noticeText}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="list oh">
+				<div class="pubTitle center">
+					<h1 class="fs30 mgb20">新闻动态</h1>
+				</div>
+				<h1 class="tit">公司动态</h1>
+				<div class="titLis">
+					<ul>
+						<li v-for="(item,index) in companyNews" :key="index">
+							<a :href="detailLink"><i></i>{{item.name}}<em>08/02</em></a>
+						</li>
+					</ul>
+				</div>
+				<h1 class="tit">市场动态</h1>
+				<div class="titLis">
+					<ul>
+						<li  v-for="(item,index) in marketNews" :key="index">
+							<a :href="detailLink"><i></i>{{item.name}}<em>08/02</em></a>
+						</li>
+					</ul>
+				</div>
+				<h1 class="tit">六大会议</h1>
+				<div class="titLis">
+					<ul>
+						<li  v-for="(item,index) in marketNews" :key="index">
+							<a :href="detailLink"><i></i>{{item.name}}<em>08/02</em></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 4大分类 -->
+	<div class="bjgayf5 pdb100 indx-sharebox center">
+		<div class="pdb100"></div>
+		<div class="w1200">
+			<ul>
+				<li v-for="(item,index) in indshareLis" :key="index">
+					<img class="icon" :src="item.iconUrl" alt="">
+					<h1>{{item.title}}</h1>
+					<p>{{item.tex1}}</p>
+					<p>{{item.tex2}}</p>
+					<p>{{item.tex3}}</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<include src="footer.html"></include>
+	</div>
+</body>
+
+	<script type="text/javascript">
+		// 优秀学员滑动banner
+		$(function(){
+			// mobile 点击按钮显示导航
+			$(".indNavbar .navBtn").click(function(){
+				if($(".indNavbar .list").css('display')=='none'){
+					$(".indNavbar .list").show()
+				}else{
+					$(".indNavbar .list").hide()
+				}
+			});
+		}); 		
+	</script>
+	<script type="text/javascript">
+		var app = new Vue({
+		    el: '#app',
+		    data:function(){
+		        return {
+		        	banner_index:0,
+		        	is_toggle:false,
+					is_show:false,
+					wx_show:2,
+					
+					wx_show:2,
+					mainData: [],
+					labelData: [],
+					newsData:[],
+					paginate: { 
+					    count: 0, 
+					    currentPage: 1, 
+					    pagesize:6, 
+					    is_page: true, 
+					},
+					searchItem:{ 
+						thirdapp_id: 2,
+						title:['in',['关于翱翔轮播','校区介绍','校区硬件','教学体系','师资力量']]
+					},
+					noticeText:"为深入贯彻落实中央和省市委关于开展“不忘初心、牢记使命”主题教育决策部署，大力转变干部作风、提升窗口单位服务效能，进一步推动为民服务解难题专项整治，市“双问计”活动办于今年6月份集中开展了2019年上半年全市“窗口单位群众满意度评价”活动。这次活动以与群众联系密切、直接服务群众和市场主体的窗口服务单位为评价对象，重点围绕“服务公开、群众观念、首问负责、办事效率、整改落实”等方面，进行了针对性、广泛性公开评价，取得了良好效果。现将开展情况和评价结果公告如下。活动的主要特点：评价内容丰富。从评价内容来看，在去年评价内容的基础上，增加了“首问负责制”等选项，突出了评价重点；从评分总值设定看，服务对象和社会公众评价的分值占比80%，充分体现了评价主体的权重作用；从参与程度看，共回收服务对象和社会公众有效问卷49.94万份，体现了评价活动的群众性和广泛性；从评价结果看，来自服务对象和社会公众的意见建议6726条，大多数意见中恳、建议务实，客观反映了真实情况，有效地找准了问题症结。活动氛围浓厚。市活动办广泛通过省、市两级传统媒体与新媒体，连续刊发通知公告和调查问卷；在各服务窗口和单位的醒目位置张贴评价活动宣传海报，广泛、精准地发动广大市民群众进行公开评价。石家庄日报、石家庄广播电视台推出了多篇专题系列报道，石家庄“双问计”微信公众号对各单位积极开展评价活动、改进窗口服务水平情况进行了持续报道。活动得到了社会各界和广大服务对象的高度认可，形成了多方关注、全民动员、全民评价、全民参与的浓厚氛围。方法科学公正。",
+					detailLink:"detailPage.html",
+					companyNews:[
+						{name:"标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"},
+						{name:"标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"},
+						{name:"标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题"}
+					],
+					marketNews:[
+						{name:"市场市场标题市场标题市场标题市场标题市场标题市场标题市场标题市场标题"},
+						{name:"市场市场标题市场标题市场标题市场标题市场标题市场标题市场标题市场标题"},
+						{name:"市场市场标题市场标题市场标题市场标题市场标题市场标题市场标题市场标题"}
+					],
+					indshareLis:[
+						{
+							iconUrl:"images/home-icon1.png",
+							title:"商圈共享",
+							tex1:"助推商圈新发展",
+							tex2:"引领店铺新营销",
+							tex3:"重构商圈新局面"
+						},
+						{
+							iconUrl:"images/home-icon2.png",
+							title:"品牌贸易",
+							tex1:"特色品牌是塑造",
+							tex2:"典范品牌孵化",
+							tex3:"优质品牌创投"
+						},
+						{
+							iconUrl:"images/home-icon3.png",
+							title:"数字商业",
+							tex1:"建立商业数据",
+							tex2:"价值数据分析",
+							tex3:"数据技术应用"
+						},
+						{
+							iconUrl:"images/home-icon4.png",
+							title:"文创平台",
+							tex1:"置业践行规划",
+							tex2:"职业经理人培育计划",
+							tex3:"我们的故事"
+						}
+					],
+					校区介绍:{},
+					校区硬件:{},
+					教学体系:{},
+					关于翱翔轮播:{},
+					teacherData:[
+						{ mainImg:"images/home-banner.png" },
+						{ mainImg:"images/home-banner2.png" },
+						{ mainImg:"images/home-banner.png" }
+					]
+					
+		        }
+		    },
+		    created:function () {
+				 var self = this;
+				 
+				window.onload=function(){
+					self.getMainData();	 
+					//window.base.bus.$emit('to_swiper',{mainData:self.teacherData});
+				};
+				console.log(self.teacherData)
+		    },
+		    methods: {
+		        
+				getMainData: function(id){
+				    var self = this;
+				    var postData = {};
+					//postData.paginate = window.base.cloneForm(self.paginate);
+				    postData.searchItem = window.base.cloneForm(self.searchItem);
+
+					// postData.getAfter = {
+					// 	child: {
+					// 		tableName: 'Label',
+					// 		middleKey: 'id',
+					// 		key: 'parentid',
+					// 		searchItem: {
+					// 			status: 1,
+					// 		},
+					// 		condition: '='
+					// 	},
+					// };
+				    var callback = function(res){
+				        console.log('getMainData', res);
+				        self.mainData.push.apply(self.mainData,res.info.data);
+				        for (var i = 0; i < self.mainData.length; i++) {
+				        	self[self.mainData[i].title] = self.mainData[i];
+				        };
+				        self.getNewsData()
+				    };
+					console.log('self.mainData',self.mainData)
+				    window.base.labelGet(postData, callback);
+				},
+				getNewsData: function(id){
+				    var self = this;
+				    var postData = {};
+				    postData.paginate = window.base.cloneForm(self.paginate);
+				    postData.searchItem = {
+				    	thirdapp_id:2,
+				    	menu_id:self['师资力量'].id
+				    };
+				
+				    var callback = function(res) {
+				        self.teacherData.push.apply(self.teacherData,res.info.data);
+				        window.base.bus.$emit('to_swiper',{mainData:self.teacherData});
+						console.log('self.teacherData',self.teacherData)
+				    };
+				    window.base.articleList(postData, callback);
+				}
+				
+		    }
+		});
+	</script>
+</html>
