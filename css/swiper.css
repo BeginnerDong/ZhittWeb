@@ -1,5 +1,5 @@
 .swiper_box{
-	margin: 0 auto;height: 440px;position: relative;
+	margin: 0 auto;height: 520px;position: relative;
 }
 
 .swiper_box_item{
@@ -15,7 +15,7 @@
 }
 
 .swiper_box_item_img{
-	width: 100%; height:100%; margin: 0 auto;
+	min-width: 100%; height:100%; margin: 0 auto; position: relative;left: 50%;transform: translateX(-50%);
 }
 
 .swiper_box_item_box{
@@ -47,11 +47,11 @@
 } */
 
 /* swiper */
-.about-faculylis .arrowBtn{ position: absolute; width: 94%; top: 40%;z-index:80;left: 2%;}
-.about-faculylis .arrowBtn .btn{z-index:999;width: 40px; height: 40px; line-height: 40px; text-align: center; border-radius: 50%; background: #b5b5b6; color: #fff; font-size: 30px; cursor: pointer; }
+.about-faculylis .arrowBtn{ position: absolute; width: 94%; top: 50%;transform: translateY(-50%);z-index:80;left: 2%;}
+.about-faculylis .arrowBtn .btn{z-index:999;width: 40px; height: 70px; line-height: 70px; text-align: center; border-radius: 4px; background: rgba(0,0,0,0.3); color: #fff; font-size: 30px; cursor: pointer; }
 
 @media screen and ( max-width:750px){ 
-	.swiper_box{ height: 180px;;}
+	.swiper_box{ height: 180px;}
 	/* .swiper_box_item{ width: 140px!important;} */
 	.swiper_box_item_on{z-index: 10;}
 	.swiper_box_item_box{ padding-top: 15px; margin-top: -15px;}
@@ -61,7 +61,7 @@
 	.swiper_box_item_box_p{ margin-bottom: 10px;}
 	
 	/* swipe 轮播 */
-	.about-faculylis .arrowBtn { width: 90%;top: 40%;left: 5%;}
-	.about-faculylis .arrowBtn .btn {width: 30px;height: 30px;line-height: 30px;font-size: 24px;}
+	.about-faculylis .arrowBtn { width: 90%;left: 5%;}
+	.about-faculylis .arrowBtn .btn {width: 30px;height: 50px;line-height: 50px;font-size: 24px;}
 	
 }
