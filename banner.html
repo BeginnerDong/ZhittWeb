@@ -1,27 +1,23 @@
-<div id="banner_app" style="">
-	<div class="banner clearfix" v-for="(item,index) in bannerData" v-show="index==banner_index" style="height:100%">
-		<img :src="item.url" />
-	</div>
-	<div class="arrowIon prev" @click="changeBanner('+')">
-		<img src="images/icon-right.png" />
-	</div>
-	<div class="arrowIon next" @click="changeBanner('-')">
-		<img src="images/icon-left.png" />
-	</div>
+<div class="ind_Tbanner pr wzxq-banner oh">
+	<ul class="swiper-wrapper">
+		<li class="swiper-slide" v-for="item in bannerData"> 
+			<img :src="item.url"/>
+		</li>
+		
+	</ul>
+	<div id="bannerFooter" class="pa oh btnav"></div>
 </div>
-
-
-<script type="text/javascript">
-	var banner_app = new Vue({
-	    el: '#banner_app',
+<script src="js/banner.js"></script>
+<script>
+	var bannerSwipe = new Vue({
+	    el: '#bannerSwipe',
 	    data:function(){
 	        return {
 	        	banner_index:0,
 	        	is_toggle:false,
 				is_show:false,
 				bannerData:[
-					{banImgUrl:"images/home-banner.png"},
-					{banImgUrl:"images/home-banner2.png"},
+				
 				],
 				searchItem:{
 					thirdapp_id:window.base.thirdapp_id,
@@ -32,6 +28,7 @@
 	    },
 	    created:function () {
 	        var self = this;
+			console.log(65465465456)
 	        var currentUrl = window.base.GetUrlRelativePath();
 		
 			var reg = /\/([^\/]+)\.html/i;
@@ -41,29 +38,25 @@
 				self.currentUrl = '/index.html';
 			};
 			
-
-    		window.base.bus.$on('to_headBanner',(res)=>{	
+			
+    		window.base.bus.$on('to_banner',(res)=>{	
 				if(res.mainImg){
 					 self.bannerData = res.mainImg
 					 return
 				};
-				console.log('res222',res)
+				
 				this.searchItem.title = res.title;
 				
 	        	this.to_headBanner()
 		    });
 			
-			self.bannerTimer = setInterval(function(){
+			/* self.bannerTimer = setInterval(function(){
 				self.changeBanner('+');
-			},3000)
+			},3000) */
 	    },
 		
 		
-		destroyed() {
-			const self = this;
-			clearInterval(this.timer);        
-			self.bannerTimer = null;
-		},
+		
 	    methods: {
 	    	to_headBanner:function(){
 				var self = this;
@@ -108,3 +101,4 @@
 	    }
 	});
 </script>
+

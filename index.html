@@ -17,6 +17,7 @@
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/include.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
+		
 	</head>
 
 	<body>
@@ -26,17 +27,11 @@
 				<include src="header.html"></include>
 			</div>
 
-			<!-- <div class="pubHeadBanner" >
-		<include src="headBanner.html"></include>
-	</div> -->
-
-			<!-- swiper轮播 -->
 			<div class="pubHeadBanner">
 				<include src="headBanner.html"></include>
 			</div>
 
-
-			<!-- 通知和动态列表 -->
+			<!-- 通知和动态列表-->
 			<div class="pdb100">
 				<div class="indNews w1200 oh">
 					<div class="list oh">
@@ -88,25 +83,13 @@
 	</body>
 
 	<script type="text/javascript">
-		// 优秀学员滑动banner
-		$(function() {
-			// mobile 点击按钮显示导航
-			$(".indNavbar .navBtn").click(function() {
-				if ($(".indNavbar .list").css('display') == 'none') {
-					$(".indNavbar .list").show()
-				} else {
-					$(".indNavbar .list").hide()
-				}
-			});
-		});
-	</script>
-	<script type="text/javascript">
 		var app = new Vue({
 			el: '#app',
 			data: function() {
 				return {
 					
 					is_toggle: false,
+					
 					paginate: {
 						count: 0,
 						currentPage: 1,
@@ -118,38 +101,6 @@
 						title: ['in', ['企业公告','企业动态']]
 					},
 					detailLink: "detailPage.html",
-					companyNews: [{
-							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
-						},
-						{
-							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
-						},
-						{
-							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
-						},
-						{
-							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
-						},
-						{
-							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
-						}
-					],
-					marketNews: [{
-							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
-						},
-						{
-							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
-						},
-						{
-							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
-						},
-						{
-							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
-						},
-						{
-							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
-						}
-					],
 					indshareLis: [{
 							iconUrl: "images/home-icon1.png",
 							title: "商圈共享",
@@ -160,7 +111,7 @@
 						{
 							iconUrl: "images/home-icon2.png",
 							title: "品牌贸易",
-							tex1: "特色品牌是塑造",
+							tex1: "特色品牌塑造",
 							tex2: "典范品牌孵化",
 							tex3: "优质品牌创投"
 						},
@@ -174,7 +125,7 @@
 						{
 							iconUrl: "images/home-icon4.png",
 							title: "文创平台",
-							tex1: "置业践行规划",
+							tex1: "职业践行规划",
 							tex2: "职业经理人培育计划",
 							tex3: "我们的故事"
 						}
@@ -191,12 +142,12 @@
 
 				window.onload = function() {
 
-					window.base.bus.$emit('to_contentOne', {
+					/* window.base.bus.$emit('to_contentOne', {
 						paginate: self.paginate
-					});
+					}); */
 					window.base.bus.$emit('to_headBanner', {
-						title: '首页轮播图'
-					});
+						title:'首页轮播图'
+					});	
 					//window.base.bus.$emit('to_swiper',{mainData:self.teacherData});
 
 				};

@@ -2,7 +2,7 @@
 /* CSS Document */
 /*  Global STYLE  */
 *{ margin:0; padding:0; line-height: 24px;}
-html{color:#222;-webkit-text-size-adjust: none;height: 100%}
+html{color:#222;-webkit-text-size-adjust: none;}
 body{height: 100%}
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
 ul,li{list-style:none;}
