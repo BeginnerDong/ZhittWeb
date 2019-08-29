@@ -1,6 +1,6 @@
 <div id="banner_app" style="">
 	<div class="banner clearfix" v-for="(item,index) in bannerData" v-show="index==banner_index" style="height:100%">
-		<img :src="item.banImgUrl" />
+		<img :src="item.url" />
 		<div  class="banner-item" >
 			<div  class="animated bounceInRight banner-imgIcon">					
 				<img :src="item.iconUrl" />	
@@ -31,7 +31,8 @@
 				searchItem:{
 					thirdapp_id:window.base.thirdapp_id,
 					title:''
-				}
+				},
+				bannerTimer:null
 	        }
 	    },
 	    created:function () {
@@ -44,42 +45,46 @@
 			}else{
 				self.currentUrl = '/index.html';
 			};
-			self.searchItem.title = self.herfIndex[self.currentUrl];
+			
 
     		window.base.bus.$on('to_headBanner',(res)=>{	
-	        	this.to_headBanner(res);
+				if(res.mainImg){
+					 self.bannerData = res.mainImg
+					 return
+				};
+				console.log('res222',res)
+				this.searchItem.title = res.title;
+				
+	        	this.to_headBanner()
 		    });
-			self.getMainData()	
+			
+			self.bannerTimer = setInterval(function(){
+				self.changeBanner('+');
+			},3000)
 	    },
+		
+		
+		destroyed() {
+			const self = this;
+			clearInterval(this.timer);        
+			self.bannerTimer = null;
+		},
 	    methods: {
 	    	to_headBanner:function(){
-
+				var self = this;
+				var postData = {};
+				postData.searchItem = window.base.cloneForm(self.searchItem);
+				var callback = function(res){
+				     if(res.info.data.length>0){
+						 self.bannerData =res.info.data[0].mainImg;
+						 console.log('self.bannerData',self.bannerData)
+				     };    
+				};
+				window.base.labelGet(postData, callback);
 	    	},
 
 
-	    	getMainData: function(id){
-			    var self = this;
-			    var postData = {};
-			    postData.searchItem = window.base.cloneForm(self.searchItem);
-				postData.getAfter = {
-					child: {
-						tableName: 'Label',
-						middleKey: 'id',
-						key: 'parentid',
-						searchItem: {
-							status: 1,
-						},
-						condition: '='
-					},
-				};
-			   //  var callback = function(res){
-			   //      if(res.info.data.length>0&&res.info.data[0]['child']){
-						// self.bannerData =res.info.data[0]['child'];
-						// console.log('self.bannerData',self.bannerData)
-			   //      };    
-			   //  };
-			    window.base.labelGet(postData, callback);
-			},
+	    	
 	        
 	    	changeBanner: function(type) {
 	    		var self = this;

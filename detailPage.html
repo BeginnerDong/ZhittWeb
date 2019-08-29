@@ -21,32 +21,29 @@
 	<body>
 		<div id="app" style="height: 100%">
 			<!-- 网站导航 -->
-			<div class="pubHeader" >
+			<div class="pubHeader">
 				<include src="header.html"></include>
 			</div>
 			<!-- banner轮播 -->
-			<div class="pubHeadBanner" >
+			<div class="pubHeadBanner">
 				<include src="headBanner.html"></include>
 			</div>
-			
+
 			<div class="detailePag" style="min-height: 70%">
 				<div class="w1200">
 					<div class="topTit borderB1">
-						<h1 class="title pdb10">{{mainData.title}}</h1>	
+						<h1 class="title pdb10">{{mainData.title}}</h1>
 						<p class="data fs16 gray9">{{mainData.create_time}}</p>
 					</div>
 					<div class="content ql-editor " style="clear: both;">
-						<div class="inforCont pdb100"><!--  v-html="mainData.content" -->
-							<p>互联网的高速发展，让人们逐渐无法离开现在的智能手机，无论是什么年龄段的人，无论是来自大城市还是小山区，手机几乎已经成为了标配。 手机除了必要的硬件设备之外，最为需要的就是信号和流量了，如果没有了这两样，那么抱着个手机也像抱着块板砖，工作和生活都受到了极大的影响。而在国内想要使用流量就只能求助于三大运营商，这三足鼎立也构成了我国的运营市场。</p>
-							<h1>内容小标题内容小标题内容小标题内容小标题内容小标题</h1>
-							<p>其中用户量最多的一家就是移动公司，它的用户量比联通和电信加起来的还要多很多，之所以能够拥有这么多用户，是因为它在科技上的发展遥遥领先于其他两家。移动的网速快，信号稳定，且覆盖面比较广，它的优势让它在发展前期笼络了不少的用户。但是随着它的用户数量上涨，它慢慢变得高傲起来，不光提高了资费，就连服务态度也变得相当傲慢无礼，一旦遇到什么问，客服总是不会及时的给出解决方法。这样的资费和服务无疑是让用户离了心，在携号转网的服务到来之际，很多移动的老用户也选择离开移动。</p>
-							<p>移动为了挽留住老用户特意推出了网龄越高的用户能够领取到的免费流量就越多的福利，虽然说福利强度并不大，但至少表明了移动对待老用户们的态度，证明了移动还是能够考虑到老用户们的，这也让很多想要离开的老用户犹豫了。</p>
-							<p>可能是因为携号转网带给移动的压力比较大，所以这次移动推出的两项福利确实做的很不错，这一次没有套路，满满的都是诚意。因为5G网络非常耗费流量，可能短短一天就需要十几个G，如果价格不低下来，很多用户根本不敢购买5G手机，而移动能够降低资费，也是做出了很大的让步，而移动的让步也让网友感受到了它的良心！</p>
+						<div class="inforCont pdb100"  v-html="mainData.content">
+							<!--  v-html="mainData.content" -->
+							
 						</div>
 					</div>
-					
+
 				</div>
-				
+
 			</div>
 			<!-- 页脚 -->
 			<include src="footer.html"></include>
@@ -59,11 +56,11 @@
 				return {
 					banner_index: 0,
 					is_toggle: true,
-					is_show:false,
-					wx_show:2,
-					mainData:{
-						title:"移动终于不再套路，开始让步，推出2大全新福利！网友：这回良心",
-						create_time:"2019-08-03 09:19"
+					is_show: false,
+					wx_show: 2,
+					mainData: {
+						title: "移动终于不再套路，开始让步，推出2大全新福利！网友：这回良心",
+						create_time: "2019-08-03 09:19"
 					},
 
 					searchItem: {
@@ -89,25 +86,27 @@
 
 			methods: {
 				init: function(e) {
-					// const self = this;
-					// console.log(666);
-					// console.log(self.banner_info);
-					// self.getMainData();
+					const self = this;
+					console.log(666);
+					console.log(self.banner_info);
+					self.getMainData();
 				},
 
-//				getMainData: function(id) {
-// 					var self = this;
-// 					var postData = {};
-// 					postData.searchItem = window.base.cloneForm(self.searchItem);
-// 					postData.searchItem.id = window.base.GetRequest().id;
-// 
-// 					var callback = (res) => {
-// 						console.log('getMainData', res);
-// 						self.mainData = res.info.data[0]
-// 
-// 					};
-// 					window.base.articleList(postData, callback);
-//				},
+				getMainData: function(id) {
+					var self = this;
+					var postData = {};
+					postData.searchItem = window.base.cloneForm(self.searchItem);
+					postData.searchItem.id = window.base.GetRequest().id;
+
+					var callback = (res) => {
+						console.log('getMainData', res);
+						self.mainData = res.info.data[0]
+						window.base.bus.$emit('to_headBanner', {
+							mainImg: self.mainData.mainImg
+						});
+					};
+					window.base.articleList(postData, callback);
+				},
 
 
 				changeBanner: function(type) {
@@ -129,20 +128,20 @@
 					console.log(self.banner_index);
 
 				},
-				
-							
-				phoneMarketing:function(index){
+
+
+				phoneMarketing: function(index) {
 					const self = this;
-					if(index==self.wx_show){
-						self.wx_show =2
-					}else{
-						self.wx_show =index
+					if (index == self.wx_show) {
+						self.wx_show = 2
+					} else {
+						self.wx_show = index
 					}
-					
-					console.log('self.wx_show',self.wx_show)
+
+					console.log('self.wx_show', self.wx_show)
 				},
-				
-				
+
+
 				consult: function(e) {
 					var self = this;
 					self.is_show = !self.is_show;

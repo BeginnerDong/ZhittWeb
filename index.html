@@ -19,225 +19,227 @@
 		<script type="text/javascript" src="js/base.js"></script>
 	</head>
 
-<body>
-	<div id="app">
-	<!-- 网站导航 -->
-	<div class="pubHeader" >
-		<include src="header.html"></include>
-	</div>
-	
-	<!-- <div class="pubHeadBanner" >
+	<body>
+		<div id="app">
+			<!-- 网站导航 -->
+			<div class="pubHeader">
+				<include src="header.html"></include>
+			</div>
+
+			<!-- <div class="pubHeadBanner" >
 		<include src="headBanner.html"></include>
 	</div> -->
-	
-	<!-- swiper轮播 -->
-	<div>
-		<include src="swiper.html"></include>
-	</div>
-	
 
-	<!-- 通知和动态列表 -->
-	<div class="pdb100">
-		<div class="indNews w1200 oh">
-			<div class="list oh">
-				<div class="pubTitle center">
-					<h1 class="fs30 mgb20">企业公告</h1>
+			<!-- swiper轮播 -->
+			<div class="pubHeadBanner">
+				<include src="headBanner.html"></include>
+			</div>
+
+
+			<!-- 通知和动态列表 -->
+			<div class="pdb100">
+				<div class="indNews w1200 oh">
+					<div class="list oh">
+						<div class="pubTitle center">
+							<h1 class="fs30 mgb20">企业公告</h1>
+						</div>
+						<h1 class="tit">公告 <a class="more" href="newsList.html?type=企业公告">更多</a></h1>
+						<div class="titLis">
+							<ul>
+								<li v-for="(item,index) in 企业公告['child']" :key="index">
+									<a :href="'./detailPage.html?id='+item.id"><i></i>{{item.title}}<em>{{item.create_time}}</em></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="list oh">
+						<div class="pubTitle center">
+							<h1 class="fs30 mgb20">企业动态</h1>
+						</div>
+						<h1 class="tit">动态 <a class="more" href="newsList.html?type=企业动态">更多</a></h1>
+						<div class="titLis">
+							<ul>
+								<li v-for="(item,index) in 企业动态['child']" :key="index">
+									<a :href="'./detailPage.html?id='+item.id"><i></i>{{item.title}}<em>{{item.create_time}}</em></a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
-				<h1 class="tit">公告 <a class="more" href="newsList.html">更多</a></h1>
-				<div class="titLis">
+			</div>
+
+			<!-- 4大分类 -->
+			<div class="bjgayf5 pdb100 indx-sharebox center">
+				<div class="pdb100"></div>
+				<div class="w1200">
 					<ul>
-						<li  v-for="(item,index) in companyNews" :key="index">
-							<a :href="detailLink"><i></i>{{item.name}}<em>08/02</em></a>
+						<li v-for="(item,index) in indshareLis" :key="index">
+							<img class="icon" :src="item.iconUrl" alt="">
+							<h1>{{item.title}}</h1>
+							<p>{{item.tex1}}</p>
+							<p>{{item.tex2}}</p>
+							<p>{{item.tex3}}</p>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<div class="list oh">
-				<div class="pubTitle center">
-					<h1 class="fs30 mgb20">企业动态</h1>
-				</div>
-				<h1 class="tit">动态 <a class="more" href="newsList.html">更多</a></h1>
-				<div class="titLis">
-					<ul>
-						<li v-for="(item,index) in marketNews" :key="index">
-							<a :href="detailLink"><i></i>{{item.name}}<em>08/02</em></a>
-						</li>
-					</ul>
-				</div>
-			</div>
+			<include src="footer.html"></include>
 		</div>
-	</div>
-
-	<!-- 4大分类 -->
-	<div class="bjgayf5 pdb100 indx-sharebox center">
-		<div class="pdb100"></div>
-		<div class="w1200">
-			<ul>
-				<li v-for="(item,index) in indshareLis" :key="index">
-					<img class="icon" :src="item.iconUrl" alt="">
-					<h1>{{item.title}}</h1>
-					<p>{{item.tex1}}</p>
-					<p>{{item.tex2}}</p>
-					<p>{{item.tex3}}</p>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<include src="footer.html"></include>
-	</div>
-</body>
+	</body>
 
 	<script type="text/javascript">
 		// 优秀学员滑动banner
-		$(function(){
+		$(function() {
 			// mobile 点击按钮显示导航
-			$(".indNavbar .navBtn").click(function(){
-				if($(".indNavbar .list").css('display')=='none'){
+			$(".indNavbar .navBtn").click(function() {
+				if ($(".indNavbar .list").css('display') == 'none') {
 					$(".indNavbar .list").show()
-				}else{
+				} else {
 					$(".indNavbar .list").hide()
 				}
 			});
-		}); 		
+		});
 	</script>
 	<script type="text/javascript">
 		var app = new Vue({
-		    el: '#app',
-		    data:function(){
-		        return {
-		        	banner_index:0,
-		        	is_toggle:false,
-					is_show:false,
-					wx_show:2,
+			el: '#app',
+			data: function() {
+				return {
 					
-					wx_show:2,
-					mainData: [],
-					labelData: [],
-					newsData:[],
-					paginate: { 
-					    count: 0, 
-					    currentPage: 1, 
-					    pagesize:6, 
-					    is_page: true, 
+					is_toggle: false,
+					paginate: {
+						count: 0,
+						currentPage: 1,
+						pagesize: 6,
+						is_page: true,
 					},
-					searchItem:{ 
+					searchItem: {
 						thirdapp_id: 2,
-						title:['in',['关于翱翔轮播','校区介绍','校区硬件','教学体系','师资力量']]
+						title: ['in', ['企业公告','企业动态']]
 					},
-					detailLink:"detailPage.html",
-					companyNews:[
-						{name:"企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"},
-						{name:"企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"},
-						{name:"企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"},
-						{name:"企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"},
-						{name:"企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"}
-					],
-					marketNews:[
-						{name:"企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"},
-						{name:"企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"},
-						{name:"企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"},
-						{name:"企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"},
-						{name:"企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"}
-					],
-					indshareLis:[
-						{
-							iconUrl:"images/home-icon1.png",
-							title:"商圈共享",
-							tex1:"助推商圈新发展",
-							tex2:"引领店铺新营销",
-							tex3:"重构商圈新局面"
+					detailLink: "detailPage.html",
+					companyNews: [{
+							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
 						},
 						{
-							iconUrl:"images/home-icon2.png",
-							title:"品牌贸易",
-							tex1:"特色品牌是塑造",
-							tex2:"典范品牌孵化",
-							tex3:"优质品牌创投"
+							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
 						},
 						{
-							iconUrl:"images/home-icon3.png",
-							title:"数字商业",
-							tex1:"建立商业数据",
-							tex2:"价值数据分析",
-							tex3:"数据技术应用"
+							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
 						},
 						{
-							iconUrl:"images/home-icon4.png",
-							title:"文创平台",
-							tex1:"置业践行规划",
-							tex2:"职业经理人培育计划",
-							tex3:"我们的故事"
+							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
+						},
+						{
+							name: "企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告企业公告"
 						}
 					],
-					校区介绍:{},
-					校区硬件:{},
-					教学体系:{},
-					关于翱翔轮播:{},
-					teacherData:[
-						{ mainImg:"images/home-banner.png" },
-						{ mainImg:"images/home-banner2.png" },
-						{ mainImg:"images/home-banner.png" }
-					]
+					marketNews: [{
+							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
+						},
+						{
+							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
+						},
+						{
+							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
+						},
+						{
+							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
+						},
+						{
+							name: "企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态企业动态"
+						}
+					],
+					indshareLis: [{
+							iconUrl: "images/home-icon1.png",
+							title: "商圈共享",
+							tex1: "助推商圈新发展",
+							tex2: "引领店铺新营销",
+							tex3: "重构商圈新局面"
+						},
+						{
+							iconUrl: "images/home-icon2.png",
+							title: "品牌贸易",
+							tex1: "特色品牌是塑造",
+							tex2: "典范品牌孵化",
+							tex3: "优质品牌创投"
+						},
+						{
+							iconUrl: "images/home-icon3.png",
+							title: "数字商业",
+							tex1: "建立商业数据",
+							tex2: "价值数据分析",
+							tex3: "数据技术应用"
+						},
+						{
+							iconUrl: "images/home-icon4.png",
+							title: "文创平台",
+							tex1: "置业践行规划",
+							tex2: "职业经理人培育计划",
+							tex3: "我们的故事"
+						}
+					],
+					企业公告: {},
+					企业动态: {},
 					
-		        }
-		    },
-		    created:function () {
-				 var self = this;
-				 
-				window.onload=function(){
-					self.getMainData();	 
-					//window.base.bus.$emit('to_swiper',{mainData:self.teacherData});
-				};
-				console.log(self.teacherData)
-		    },
-		    methods: {
-		        
-				getMainData: function(id){
-				    var self = this;
-				    var postData = {};
-					//postData.paginate = window.base.cloneForm(self.paginate);
-				    postData.searchItem = window.base.cloneForm(self.searchItem);
+					mainData:[]
 
-					// postData.getAfter = {
-					// 	child: {
-					// 		tableName: 'Label',
-					// 		middleKey: 'id',
-					// 		key: 'parentid',
-					// 		searchItem: {
-					// 			status: 1,
-					// 		},
-					// 		condition: '='
-					// 	},
-					// };
-				    var callback = function(res){
-				        console.log('getMainData', res);
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        self.getNewsData()
-				    };
-					console.log('self.mainData',self.mainData)
-				    window.base.labelGet(postData, callback);
-				},
-				getNewsData: function(id){
-				    var self = this;
-				    var postData = {};
-				    postData.paginate = window.base.cloneForm(self.paginate);
-				    postData.searchItem = {
-				    	thirdapp_id:2,
-				    	menu_id:self['师资力量'].id
-				    };
-				
-				    var callback = function(res) {
-				        self.teacherData.push.apply(self.teacherData,res.info.data);
-				        window.base.bus.$emit('to_swiper',{mainData:self.teacherData});
-						console.log('self.teacherData',self.teacherData)
-				    };
-				    window.base.articleList(postData, callback);
 				}
+			},
+			created: function() {
+				var self = this;
+
+				window.onload = function() {
+
+					window.base.bus.$emit('to_contentOne', {
+						paginate: self.paginate
+					});
+					window.base.bus.$emit('to_headBanner', {
+						title: '首页轮播图'
+					});
+					//window.base.bus.$emit('to_swiper',{mainData:self.teacherData});
+
+				};
+				self.getMainData()
+
+			},
+			methods: {
 				
-		    }
+				goDetail(id){
+					window.base.location
+				},
+
+				getMainData: function(id) {
+					var self = this;
+					var postData = {};
+					
+					postData.searchItem = window.base.cloneForm(self.searchItem);
+
+					postData.getAfter = {
+						child: {
+							tableName: 'Article',
+							middleKey: 'id',
+							key: 'menu_id',
+							searchItem: {
+								status: 1,
+							},
+							condition: '='
+						},
+					};
+					var callback = function(res) {
+						console.log('getMainData', res);
+						self.mainData.push.apply(self.mainData, res.info.data);
+						for (var i = 0; i < self.mainData.length; i++) {
+							self[self.mainData[i].title] = self.mainData[i];
+						};
+						console.log(self['企业公告'])
+					};
+					console.log('self.mainData', self.mainData)
+					window.base.labelGet(postData, callback);
+				},
+
+
+			}
 		});
 	</script>
 </html>

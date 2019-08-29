@@ -49,7 +49,7 @@
 .indNews .list .tit::before{ content: ""; width: 5px; height: 24px; background: #0d6fb8; position: absolute; left: 0; top: 50%; transform:translate(0,-50%);}
 .indNews .list .more{ color: #999; float: right; font-size: 16px;}
 .indNews .list .titLis li{ padding-bottom: 10px;}
-.indNews .list .titLis li a{display: block; position: relative; padding:0 80px 0 20px; line-height: 30px; height: 30px;overflow:hidden;white-space: nowrap; text-overflow: ellipsis; font-size: 16px;}
+.indNews .list .titLis li a{display: block; position: relative; padding:0 150px 0 20px; line-height: 30px; height: 30px;overflow:hidden;white-space: nowrap; text-overflow: ellipsis; font-size: 16px;}
 .indNews .list .titLis li a:before{content: "";width: 6px; height: 6px;background: #0d6fb8;border-radius: 50%;display: block; position: absolute;top: 50%; left: 0; transform:translate(0,-50%);}
 .indNews .list .titLis li a em{ position: absolute; top: 0; right: 0; color: #666; display: block;line-height: 30px;}
 
@@ -81,7 +81,7 @@ footer .underCnt .phone div{ padding-top: 20px; color: #fff; font-size: 18px; li
 footer .underCnt .phone div i{ display: inline-block;vertical-align: middle;font-size: 26px;}
 footer .underCnt .phone div em{ display: inline-block;font-size: 20px; margin-left: 15px;}
 footer .ewmBox .lis{ float: left; margin-left: 50px;}
-footer .ewmBox .lis img{ width: 120px; height: auto; display: block;}
+footer .ewmBox .lis img{ width: 120px; height: 120px; display: block;}
 footer .ewmBox .lis p{ color: #fff; font-size: 16px; padding-top: 20px; line-height: 1}
 footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;margin-top: 30px; border-top: 1px solid #2c516d; }
 

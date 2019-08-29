@@ -32,14 +32,14 @@
 			
 			<div class="pdb100 w1200 newsListIndx">
 				<div class="pubTitle center">
-					<h1 class="fs30 mgb20">企业公告</h1>
+					<h1 class="fs30 mgb20">{{mainData.title}}</h1>
 				</div>
 				<div class="indNews oh">
 					<div class="list oh">
 						<div class="titLis">
 							<ul>
-								<li  v-for="(item,index) in companyNews" :key="index">
-									<a href="detailPage.html"><i></i>{{item.name}}<em>{{item.time}}</em></a>
+								<li  v-for="(item,index) in mainData.child" :key="index">
+									<a :href="'./detailPage.html?id='+item.id"><i></i>{{item.title}}<em>{{item.create_time}}</em></a>
 								</li>
 							</ul>
 						</div>
@@ -54,7 +54,7 @@
 		    el: '#app',
 		    data:function(){
 		        return {
-					mainData: [],
+					mainData: {},
 					labelData: [],
 					paginate: { 
 					    count: 0, 
@@ -89,50 +89,40 @@
 						}
 					],
 					currentId:'',
+					searchItem:{}
 		        }
 		    },
 		    created:function () {
 		        var self = this;
-		        window.base.bus.$emit('to_contentOne',{paginate:self.paginate});
-				//self.getMainData();	
+				self.searchItem.title =  window.base.GetRequest().type;
+				self.getMainData();	
 		    },
 		    methods: {
-		    	  
-				getMainData: function(id){
-				    var self = this;
-				    var postData = {};
-				    //postData.paginate = window.base.cloneForm(self.paginate);
-				    postData.searchItem = window.base.cloneForm(self.searchItem);
-					/*postData.getBefore ={
-					 	caseData:{
-							tableName:'Label',
-							searchItem:{
-							  parentid:['in',[146]]
-							},
-							middleKey:'menu_id',
-							key:'id',
-							condition:'in',
-						},
-					};*/
+		    	 
+				getMainData: function(id) {
+					var self = this;
+					var postData = {};
+					
+					postData.searchItem = window.base.cloneForm(self.searchItem);
+				
 					postData.getAfter = {
 						child: {
-							tableName: 'Label',
+							tableName: 'Article',
 							middleKey: 'id',
-							key: 'parentid',
+							key: 'menu_id',
 							searchItem: {
 								status: 1,
 							},
 							condition: '='
 						},
 					};
-				    var callback = function(res){
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        window.base.bus.$emit('to_contentOne',{labelData:self['高考体育']});
-				    };
-				    window.base.labelGet(postData, callback);
+					var callback = function(res) {
+						console.log('getMainData', res);
+						self.mainData = res.info.data[0]
+						
+					};
+					console.log('self.mainData', self.mainData)
+					window.base.labelGet(postData, callback);
 				},
 				
 		    }

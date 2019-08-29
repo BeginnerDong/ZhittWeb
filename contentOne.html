@@ -13,39 +13,16 @@
 			</div>
 			<div class="main-rightList fr">
 				<div class="contXqTit center">
-					<span class="tit">{{currentTitle}}</span>
+					<span class="tit">{{contentData.title?contentData.title:''}}</span>
 				</div>
 				<div class="portLisbox1">
 					<div class="contBox" >
-						<p class="fs16 line30 pdb20">知业升涯诞生于2004年，公司注册于2018年5月24号，总部设在中华文化古都、丝绸之路七点————西安。是根据创始人践行“学业、酒业、创业、实业和嘉业”的置业规划过程中，在中国进入新时代背景下，结合创始团队“现场策划、创新营销、实战运营、技术研发、信息管理”等核心优势，并通过洞察虚实两大经济市场环境，针对实体店铺转型升级的迫切需要而诞生的一家基于文化和科技为主的服务型企业。</p>
-						<p><img src="images/understand-img.png" ></p>
+						<div class="content ql-editor " style="clear: both;">
+							<div class="inforCont pdb100" v-html="contentData.content">
+							</div>
+						</div>
 					</div>
-					<!-- <ul>
-						<template v-for="item in contentData">
-							<li >
-								<a :href="'./detailPage.html?id='+item.id">
-									<img class="photo" :src="item.mainImg[0]?item.mainImg[0].url:''">
-									<div class="list">
-										<h2>{{item.title}}</h2>
-										<p class="tex2">{{item.description}}</p>
-										<p class="data">{{item.create_time}}</p>
-									</div>
-								</a>
-							</li>	
-						</template>
-					</ul> -->
 				</div>
-				<div class="all-pages" v-if="is_show">
-					<span>
-						共:{{allPages}}页
-					</span>
-		        	<span class="no-prev" data-type="back" @click="changePage">上一页</span>
-					<template v-for="item in pageArray">
-						<span :class="item == paginate.currentPage?'current':''" :data-page="item" @click="linkTo">{{item}}</span>
-					</template>
-		            <!-- <a href="#">2</a><a href="#">3</a>&nbsp;...&nbsp;<a href="#">100</a> -->
-					<a  class="next" data-type="next" @click="changePage">下一页</a>
-		        </div>
 			</div>
 		</div>
 	</div>
@@ -61,20 +38,8 @@
 	        	banner_index:0,
 	        	is_toggle:false,
 				is_show:false,
-				contentData:[
-					
-				],
-				labelData:{
-					title:"了解我们",
-					child:[
-						{title:"公司简介"},
-						{title:"公司文化"},
-						{title:"企业经营理念"},
-						{title:"战略规划"},
-						{title:"创始人团队介绍"},
-						{title:"发展历程"}
-					]
-				},
+				contentData:{},
+				labelData:{},
 				allPages:'',
 				pageArray:[],
 				o_paginate:{
@@ -90,14 +55,13 @@
 				    is_page: true, 
 				},
 				currentId:0,
-				currentIndex:0,
 				currentTitle:'公司简介',
 				currentUrl:''
 	        }
 	    },
 	    created:function () {
 	        var self = this;
-	        var currentUrl = window.base.GetUrlRelativePath();
+	       var currentUrl = window.base.GetUrlRelativePath();
 		
 			var reg = /\/([^\/]+)\.html/i;
 			if(reg.exec(currentUrl)&&reg.exec(currentUrl)[0]){
@@ -108,17 +72,16 @@
 			window.base.bus.$emit('from_contentOne',{});
     		window.base.bus.$on('to_contentOne',(res)=>{	
 	        	this.to_contentOne(res);
+				console.log('res',res)
 		    });
 	    },
 	    methods: {
 
-	    	// labelChange:function(id,index){
-	    	// 	var self = this;
-	    	// 	self.currentId = id;
-	    	// 	self.currentIndex = index;
-	    	// 	self.currentTitle = self.labelData['child'][index].title;
-	    	// 	self.getMainData(true)
-	    	// },
+	    	 labelChange:function(id,index){
+	    	 	var self = this;
+	    	 	self.currentId = id;
+	    	 	self.getMainData()
+	    	},
 
 	    	to_contentOne:function(res){
 	    		var self = this;
@@ -134,22 +97,20 @@
 	        	};
 	    	},
 
-			getMainData: function(isNew){
+			getMainData(){
 			    var self = this;
-			    if(isNew){
-			    	self.paginate = self.o_paginate;
-			    	self.contentData = [];
-			    };
 			    var postData = {};
-			    postData.paginate = window.base.cloneForm(self.paginate);
 		    	postData.searchItem = {
 			    	thirdapp_id:2,
 			    	menu_id:self.currentId
 			    };
 			    var callback = function(res) { 
-			        self.contentData.push.apply(self.contentData,res.info.data);
-			        self.paginate['count'] = res.info.total;
-			        window.base.computePageArr(self);
+					if(res.info.data.length>0){
+						self.contentData = res.info.data[0];	
+					}else{
+						self.contentData = {}
+					}
+			       
 			    };
 			    window.base.articleList(postData, callback);
 			},

@@ -29,16 +29,16 @@
 	        return {
 	        	is_toggle:false,
 				qrImg:[],
-				address:'陕西省西安市高新区大都荟国际',
-				phone:'18821620164',
+				address:'',
+				phone:'',
 				qrImgEwm:[
 					{
-						ewmUrl:"images/home-img1.png",
-						ewmName:"微博二维码"
+						ewmUrl:"images/home-img1.jpg",
+						ewmName:"企业微博"
 					},
 					{
-						ewmUrl:"images/home-img1.png",
-						ewmName:"公众号二维码"
+						ewmUrl:"images/home-img2.png",
+						ewmName:"企业公众号"
 					}
 				],
 				copyright:'备案号：陕ICP备18016586号-1'
@@ -59,36 +59,13 @@
 					thirdapp_id:2,
 					title:'联系我们'
 				};
-				postData.getAfter = {
-					child: {
-						tableName: 'Label',
-						middleKey: 'id',
-						key: 'parentid',
-						searchItem: {
-							status: 1,
-						},
-						condition: '='
-					},
-				};
-
 				var callback = (res) => {
 					console.log('getMainData', res);
 					self.mainData = res.info.data[0];
-					for (var i = self.mainData['child'].length - 1; i >= 0; i--) {
-						
-						if(self.mainData['child'][i].title=="地址"){
-							self.address = self.mainData['child'][i].description
-						};
-						if(self.mainData['child'][i].title=="电话"){
-							self.phone = self.mainData['child'][i].description
-						};
-						if(self.mainData['child'][i].title=="二维码"){
-							self.qrImg = self.mainData['child'][i].mainImg
-						};
-					}
-
+					self.address = self.mainData.url;
+					self.phone = self.mainData.description
 				};
-				// window.base.labelGet(postData, callback);
+				window.base.labelGet(postData, callback);
 			},
 	        
 	    	

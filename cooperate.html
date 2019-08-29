@@ -50,7 +50,7 @@
 					},
 					searchItem:{ 
 						thirdapp_id: 2,
-						title:['in',['招商合作','招商条件']]
+						title:['in',['招商合作']]
 					},
 					高考体育轮播:[],
 					高考体育:[],
@@ -61,46 +61,35 @@
 		    created:function () {
 		        var self = this;
 		        window.base.bus.$emit('to_contentOne',{paginate:self.paginate});
-				//self.getMainData();	
+		    	self.getMainData();	
 		    },
 		    methods: {
 		    	  
-				getMainData: function(id){
-				    var self = this;
-				    var postData = {};
-				    //postData.paginate = window.base.cloneForm(self.paginate);
-				    postData.searchItem = window.base.cloneForm(self.searchItem);
-					/*postData.getBefore ={
-					 	caseData:{
-							tableName:'Label',
-							searchItem:{
-							  parentid:['in',[146]]
-							},
-							middleKey:'menu_id',
-							key:'id',
-							condition:'in',
-						},
-					};*/
-					postData.getAfter = {
-						child: {
-							tableName: 'Label',
-							middleKey: 'id',
-							key: 'parentid',
-							searchItem: {
-								status: 1,
-							},
-							condition: '='
-						},
-					};
-				    var callback = function(res){
-				        self.mainData.push.apply(self.mainData,res.info.data);
-				        for (var i = 0; i < self.mainData.length; i++) {
-				        	self[self.mainData[i].title] = self.mainData[i];
-				        };
-				        window.base.bus.$emit('to_contentOne',{labelData:self['高考体育']});
-				    };
-				    window.base.labelGet(postData, callback);
-				},
+		    	getMainData(){
+		    	    var self = this;
+		    	    var postData = {};
+		    	    postData.searchItem = window.base.cloneForm(self.searchItem);
+		    		postData.getAfter = {
+		    			child: {
+		    				order:{
+		    					create_time:'asc'
+		    				},
+		    				tableName: 'Label',
+		    				middleKey: 'id',
+		    				key: 'parentid',
+		    				searchItem: {
+		    					status: 1,
+		    				},
+		    				condition: '='
+		    			},
+		    		};
+		    	    var callback = function(res){
+		    	        self.mainData = res.info.data[0]
+		    	        
+		    	        window.base.bus.$emit('to_contentOne',{labelData:self.mainData});
+		    	    };
+		    	    window.base.labelGet(postData, callback);
+		    	},
 				
 		    }
 		});
