@@ -1,5 +1,5 @@
 window.base = {
-	g_restUrl: 'http://www.zhicareer.com/api/public/index.php/api/v1/',
+	g_restUrl: 'https://www.zhicareer.com/api/public/index.php/api/v1/',
 
 	thirdapp_id:2,
 	test:666,
