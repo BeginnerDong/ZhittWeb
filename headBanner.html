@@ -2,12 +2,19 @@
 	<div class="banner clearfix" v-for="(item,index) in bannerData" v-show="index==banner_index" style="height:100%">
 		<img :src="item.url" />
 	</div>
-	<div class="arrowIon prev" @click="changeBanner('+')">
+	
+	<!-- 导航点 -->
+	<div class="banBtnNav">
+		<span v-for="(item,index) in bannerData" :class="index==banner_index?'active':''" :data-index="index" @click="toBannerOne"></span>
+	</div>
+	
+	<!-- 左右按钮 -->
+	<!-- <div class="arrowIon prev" @click="changeBanner('+')">
 		<img src="images/icon-right.png" />
 	</div>
 	<div class="arrowIon next" @click="changeBanner('-')">
 		<img src="images/icon-left.png" />
-	</div>
+	</div> -->
 </div>
 
 
@@ -65,6 +72,14 @@
 			self.bannerTimer = null;
 		},
 	    methods: {
+			
+			toBannerOne:function(e){
+				const self = this;
+				console.log('e',e)
+				var index = parseInt(e.target.dataset.index);
+				self.banner_index = index;
+			},
+			
 	    	to_headBanner:function(){
 				var self = this;
 				var postData = {};
@@ -86,14 +101,14 @@
 	    		}else if((type=='-')){
 	    			self.banner_index -= 1;
 	    		};
-	    		console.log(self.banner_index);
+	    		
 	    		if(self.banner_index<0){
 	    			self.banner_index = self.bannerData.length-1
 	    		};
 	    		if(self.banner_index==self.bannerData.length){
 	    			self.banner_index = 0
 	    		};	
-	    		
+	    		console.log('self.banner_index',self.banner_index);
 	    	},
 			
 			intoPath:function(url,id){

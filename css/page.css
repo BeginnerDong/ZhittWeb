@@ -24,6 +24,11 @@
 #banner_app .arrowIon.prev{right:30px;}
 #banner_app .arrowIon.next{left:30px;}
 
+
+.banBtnNav{ width: 100%; text-align: center; position: absolute; bottom:3%; left: 0;z-index: 9;}
+.banBtnNav span{ display:inline-block; margin: 0 5px; border-radius: 50%; background:rgba(170,170,170); width: 10px; height: 10px;box-shadow: 0 0 5px rgba(255,255,255,0.6); opacity: 0.8;}
+.banBtnNav span.active{ opacity: 1; width: 20px; height: 10px;border-radius: 5px; background: #777;box-shadow: 0 0 3px rgba(0,0,0,0.4);}
+
 /* 网站自动轮播banner */	
 .ind_Tbanner{box-sizing: border-box; width: 100%;height: 100%; position: relative;overflow: hidden;}
 .ind_Tbanner ul{position:relative;width: 100%;height:100%;z-index:1;display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex;-webkit-transition-property:-webkit-transform;-moz-transition-property:-moz-transform;-o-transition-property:-o-transform;-ms-transition-property:-ms-transform;transition-property:transform;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}
