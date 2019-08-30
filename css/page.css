@@ -100,6 +100,7 @@ footer .ewmBox .lis p{ color: #fff; font-size: 16px; padding-top: 20px; line-hei
 footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;margin-top: 30px; border-top: 1px solid #2c516d;}
 
 /*列表左侧导航*/
+.LRListCont{ padding-top: 80px;}
 .main-leftNav{ width: 20%; border:1px solid #bdbdbd; box-sizing:border-box; padding-bottom: 40px; margin-bottom: 50px;}
 .main-leftNav .tit{ background: #0d6fb8; font-size: 20px; color: #fff; line-height: 50px; padding: 0 20px;box-sizing:border-box; height: 50px; overflow: hidden;text-overflow:ellipsis; white-space: nowrap;}
 .main-leftNav .selnav a{ width: 80%; line-height: 50px;height: 50px;padding: 0 10px; overflow: hidden;border:1px solid #d7d7d7; display: block;margin: 0 auto; margin-top: 20px; font-size: 18px; color: #0d6fb8;box-sizing: border-box;overflow: hidden;text-overflow:ellipsis; white-space: nowrap;}
@@ -164,7 +165,7 @@ footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;ma
 	body{ padding-top: 61px;}
 	.indNavbar .navBtn{ display: block;}
 	
-	.pdb100{ padding-bottom: 30px;}
+	.pdb100{ padding-bottom: 20px;}
 	.pubTitle{ padding: 30px 0 20px 0;}
 	.pubTitle h1{ font-size: 22px; margin-bottom: 0;}
 	.pubTitle p{ font-size: 16px; padding-bottom: 30px;}
@@ -204,6 +205,7 @@ footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;ma
 	footer .ewmBox .lis img{ width: 100px;height: 100px; margin: 0 auto;}
 	footer .ewmBox .lis p{ padding-top: 10px; font-size: 14px;}
 	footer .copyright{ font-size: 12px; clear: both;}
+	footer .copyright p{ line-height: 20px;}
 	
 	
 	/* 详情页导航 */
@@ -214,6 +216,7 @@ footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;ma
 	.detailePag .inforCont p{ font-size: 14px;padding-top:0px;line-height: 24px;}
 	.detailePag .inforCont h1{ font-size: 16px;}
 	
+	.LRListCont{ padding-top: 10px;}
 	.main-leftNav{ border:none;  width: 100%;padding-bottom: 20px;margin-bottom: 0;}
 	.main-leftNav .tit{font-size: 16px;padding: 0 5px;text-align: center; line-height: 40px; height: 40px;}
 	.main-leftNav .selnav{ text-align: center; padding-top:15px;}

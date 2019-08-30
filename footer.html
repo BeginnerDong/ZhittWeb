@@ -17,8 +17,10 @@
 				<div class="lis" v-for="item in qrImgEwm" ><img :src="item.ewmUrl"><p>{{item.ewmName}}</p></div>	
 			</div>
 		</div>
-		<div><p class="copyright center">{{copyright}}</p></div>
-		<div><p class="center" style="font-size: 14px;clear: both;color: #eee;padding-bottom: 10px;">{{beian}}</p></div>
+		<div class="copyright center">
+			<p>{{copyright}}</p>
+			<p>{{beian}}</p>
+		</div>
 	</div>
 	
 </footer>
