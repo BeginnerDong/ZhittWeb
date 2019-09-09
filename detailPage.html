@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta name="description" content="">
 		<meta name="keywords" content="">
-		<title>详情页</title>
+		<title>知条条官网</title>
 		<link type="text/css" rel="stylesheet" href="css/public.css">
 		<link type="text/css" rel="stylesheet" href="font/iconfont.css">
 		<link rel="stylesheet" type="text/css" href="css/page.css">
@@ -80,6 +80,7 @@
 			created() {
 				const self = this;
 				self.init()
+				
 			},
 
 			methods: {
@@ -100,8 +101,8 @@
 						console.log('getMainData', res);
 						self.mainData = res.info.data[0]
 						window.base.bus.$emit('to_headBanner', {
-							mainImg: self.mainData.mainImg
-						});
+							title:'首页轮播图'
+						});	
 					};
 					window.base.articleList(postData, callback);
 				},
