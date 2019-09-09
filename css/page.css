@@ -63,7 +63,7 @@
 .indNews .list .tit::before{ content: ""; width: 5px; height: 24px; background: #0d6fb8; position: absolute; left: 0; top: 50%; transform:translate(0,-50%);}
 .indNews .list .more{ color: #999; float: right; font-size: 16px;}
 .indNews .list .titLis li{ padding-bottom: 10px;}
-.indNews .list .titLis li a{display: block; position: relative; padding:0 150px 0 20px; line-height: 30px; height: 30px;overflow:hidden;white-space: nowrap; text-overflow: ellipsis; font-size: 16px;}
+.indNews .list .titLis li a{display: block; position: relative; padding:0 160px 0 20px; line-height: 30px; height: 30px;overflow:hidden;white-space: nowrap; text-overflow: ellipsis; font-size: 16px;}
 .indNews .list .titLis li a:before{content: "";width: 6px; height: 6px;background: #0d6fb8;border-radius: 50%;display: block; position: absolute;top: 50%; left: 0; transform:translate(0,-50%);}
 .indNews .list .titLis li a em{ position: absolute; top: 0; right: 0; color: #666; display: block;line-height: 30px;}
 
@@ -80,6 +80,7 @@
 
 
 /*内容详情页*/
+.detailePag .box{width: 60%;margin: 0 auto;}
 .detailePag .topTit{ padding: 50px 0 30px 0;}
 .detailePag .title{ font-size: 26px; line-height: 40px; }
 .detailePag .inforCont{padding-top: 40px ; color: #444;}
@@ -178,7 +179,7 @@ footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;ma
 	.indNews .list .more{ font-size: 14px;}
 	.indNews .list .pic{ padding-bottom: 0;    margin-bottom: 0;}
 	.indNews .list .titLis li{ padding-top: 0px;}
-	.indNews .list .titLis li a{ font-size: 14px; padding: 0px 50px 0px 12px;height: auto;}
+	.indNews .list .titLis li a{ font-size: 14px; padding: 0px 150px 0px 12px;height: auto;}
 	.indNews .list .titLis li a em{font-size: 14px;}
 	
 	.newsListIndx .indNews .list{ width: 100%!important;}
@@ -187,8 +188,8 @@ footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;ma
 	/* 首页的4大类列表 */
 	.indx-sharebox ul{display: flex; justify-content: space-around; flex-wrap: wrap;}
 	.indx-sharebox li{ width: 50%; padding-bottom: 30px;}
-	.indx-sharebox li .icon{  width: 50px; height: 50px;}
-	.indx-sharebox li h1{ font-size:20px;padding:15px 0 5px 0; line-height: 30px;}
+	.indx-sharebox li .icon{  width: 40px; height: 40px;}
+	.indx-sharebox li h1{ font-size:18px;padding:15px 0 5px 0; line-height: 30px;}
 	.indx-sharebox li p{ font-size: 14px;padding-top: 0px;}
 
 	footer{ padding:20px 0 0 0;}
@@ -209,6 +210,7 @@ footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;ma
 	
 	
 	/* 详情页导航 */
+	.detailePag .box{width: 100%;}
 	.detailePag .topTit{padding: 30px 0 20px 0;}
 	.detailePag .topTit .title{ font-size: 20px; line-height: 30px; padding-bottom: 10px;}
 	.detailePag .topTit .data{ font-size: 14px;}
