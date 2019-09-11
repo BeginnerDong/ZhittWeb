@@ -231,9 +231,9 @@ footer .copyright{ font-size: 14px; clear: both; padding: 10px 0; color: #eee;ma
 
 	
 	/* 业务体系 */
-	.work_System_Lis ul li{ width: 45%; margin:10px 2%; height: 220px; border-radius:4px;padding: 10px; }
-	.work_System_Lis ul li .icon{ width: 60px;height: 60px; margin: 20px auto 15px auto;}
-	.work_System_Lis ul li .tit{ font-size: 18px; line-height: 30px; padding-bottom: 10px;}
+	.work_System_Lis ul li{ width: 45%; margin:10px 2%; height: 200px; border-radius:4px;padding: 10px; }
+	.work_System_Lis ul li .icon{ width: 45px;height: 45px; margin: 20px auto 15px auto;}
+	.work_System_Lis ul li .tit{ font-size: 16px; line-height: 24px; padding-bottom: 10px;}
 	.work_System_Lis ul li .text{font-size: 14px;  -webkit-line-clamp: 2; line-height: 24px; height: 48px; }
 
 }
